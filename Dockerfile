@@ -1,25 +1,25 @@
 # Use the official PHP 8.1 image with Apache
 FROM php:8.1-apache
 
-# Update and install utilities (e.g., for handling zip files)
+# Update and install required packages
 RUN apt-get update && apt-get install -y \
-    libzip-dev zip unzip apache2
+    libzip-dev \
+    zip \
+    unzip \
+    && docker-php-ext-install zip pdo pdo_mysql
 
-# Enable Apache mod_rewrite (for pretty URLs, optional)
+# Enable Apache mod_rewrite (for pretty URLs)
 RUN a2enmod rewrite
 
-# Copy the application files into Apache's document root
+# Copy application files
 COPY . /var/www/html/
 
-# Set proper ownership/permissions on the copied files
-RUN chown -R www-data:www-data /var/www/html
+# Set proper permissions (adjust as needed for your app)
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
 
-# Expose port 80 for HTTP
+# Expose port 80
 EXPOSE 80
 
-# Copy the custom entrypoint script into the container
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-# Set the entrypoint to our custom script
-ENTRYPOINT ["/entrypoint.sh"]
+# The default command from php:8.1-apache will run Apache in foreground
+# No need to specify CMD as it inherits the parent image's CMD
