@@ -1,0 +1,431 @@
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.subtitle {
+    font-style: italic;
+    margin-top: 0;
+}
+
+.data-section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Map styling */
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Flood data styling */
+.flood-data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.sensor-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.sensor-card h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.sensor-details p {
+    margin: 5px 0;
+}
+
+/* Severity colors */
+.sensor-card.low {
+    border-left: 5px solid #4CAF50;  /* GREEN - matches LOW_FLOOD */
+}
+
+.sensor-card.moderate {
+    border-left: 5px solid #FFC107;  /* YELLOW - matches MODERATE_FLOOD */
+}
+
+.sensor-card.high {
+    border-left: 5px solid #FF0000;  /* RED - matches HIGH_FLOOD */
+}
+
+.sensor-card.severe {
+    border-left: 5px solid #FF0000;  /* RED - matches HIGH_FLOOD */
+}
+
+.severity-badge.low {
+    background-color: #4CAF50;  /* GREEN - matches LOW_FLOOD */
+}
+
+.severity-badge.moderate {
+    background-color: #FFC107;  /* YELLOW - matches MODERATE_FLOOD */
+}
+
+.severity-badge.high {
+    background-color: #FF0000;  /* RED - matches HIGH_FLOOD */
+}
+
+.severity-badge.severe {
+    background-color: #FF0000;  /* RED - matches HIGH_FLOOD */
+}
+
+.severity-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+}
+
+.severity-badge.low {
+    background-color: #4CAF50;
+}
+
+.severity-badge.moderate {
+    background-color: #FFC107;
+    color: #333;
+}
+
+.severity-badge.high {
+    background-color: #f32308;
+}
+
+.severity-badge.severe {
+    background-color: #eb1e0f;
+}
+
+/* Form styling */
+.form-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.form-field {
+    flex: 1;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-field input, .form-field select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #41af45;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Loading state */
+.loading {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+}
+
+/* Error messages */
+.error {
+    color: #F44336;
+    padding: 10px;
+    background-color: #FFEBEE;
+    border-radius: 4px;
+}
+
+/* Route result styling */
+.route-info {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #E8F5E9;
+    border-radius: 5px;
+}
+
+.route-directions ol {
+    padding-left: 20px;
+}
+
+.route-directions li {
+    margin-bottom: 10px;
+}
+
+/* Route calculator styles */
+.route-calculator {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.route-calculator h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+.route-calculator .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.route-calculator select {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.route-calculator button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.route-calculator button:hover {
+    background-color: #0069d9;
+}
+
+/* Route information styles */
+#routeInfo {
+    margin-top: 20px;
+}
+
+.route-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.route-option {
+    border-left: 5px solid #28a745;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.route-option.not-passable {
+    border-left-color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.route-option h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+.route-type-label {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.route-option .safe {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.route-option .warning {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.route-option .danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Flood marker styles */
+.flood-marker {
+    background: transparent;
+    border: none;
+}
+
+.marker-pin {
+    width: 30px;
+    height: 30px;
+    border-radius: 50% 50% 50% 0;
+    background: #c30b82;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 50%;
+    top: 50%;
+    margin: -15px 0 0 -15px;
+}
+
+.marker-pin::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    margin: 3px 0 0 3px;
+    background: #fff;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.marker-pin.green {
+    background: #28a745;
+}
+
+.marker-pin.yellow {
+    background: #ffc107;
+}
+
+.marker-pin.orange {
+    background: #fd7e14;
+}
+
+.marker-pin.red {
+    background: #dc3545;
+}
+
+.route-option .safe {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.route-option .warning {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.route-option .danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Make sure the map is visible */
+#map {
+    height: 500px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Route passability styling */
+.route-option.not-passable {
+    border-left: 5px solid #FF0000;
+    background-color: #FFEBEE;
+}
+
+.route-option .safe {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.route-option .warning {
+    color: #FFA500;
+    font-weight: bold;
+}
+
+.route-option .danger {
+    color: #FF0000;
+    font-weight: bold;
+}
+
+/* Route type styling */
+.route-type-label {
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.route-option .safe {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.route-option .warning {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.route-option .danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Waze navigation button */
+.navigation-buttons {
+    margin-top: 15px;
+}
+
+.waze-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #33ccff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.waze-button:hover {
+    background-color: #00aaff;
+}
+
+.waze-button img {
+    vertical-align: middle;
+}

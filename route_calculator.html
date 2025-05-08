@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood-Aware Route Calculator</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Route calculator specific styles */
+        .route-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group select, .form-group button {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        #calculateRoute {
+            background: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        #calculateRoute:hover {
+            background: #0b7dda;
+        }
+        
+        #calculateRoute:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .route-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .route-option {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .route-option h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .route-type-label {
+            display: inline-block;
+            background: #e0e0e0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+        }
+        
+        .safe {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .warning {
+            background: #fff8e1;
+            color: #f57f17;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .danger {
+            background: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .not-passable {
+            border-left: 4px solid #c62828;
+        }
+        
+        .navigation-buttons {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .waze-button {
+            display: inline-block;
+            background: #33ccff;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .directions-toggle {
+            color: #2196F3;
+            cursor: pointer;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .directions {
+            padding-left: 20px;
+        }
+        
+        .directions li {
+            margin-bottom: 8px;
+        }
+        
+        .route-error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Flood-Aware Route Calculator</h1>
+            <p>Plan your journey with real-time flood information</p>
+        </header>
+        
+        <main>
+            <div class="route-form">
+                <h2>Calculate Route</h2>
+                <div class="form-group">
+                    <select id="startLocation" required>
+                        <option value="">Select Start Location</option>
+                        <!-- Options will be populated by JS -->
+                    </select>
+                    
+                    <select id="vehicleType" required>
+                        <option value="">Select Vehicle Type</option>
+                        <option value="sedan">Sedan</option>
+                        <option value="suv">SUV</option>
+                        <option value="pickup">Pickup</option>
+                        <option value="4x4">4x4</option>
+                    </select>
+                    
+                    <select id="routeType" required>
+                        <option value="safest">Safest Route (No Flood)</option>
+                        <option value="shortest">Shortest Route (Minor Flood)</option>
+                        <option value="longest">Alternative Route (No Flood)</option>
+                    </select>
+                    
+                    <button id="calculateRoute" type="button">Calculate Route</button>
+                </div>
+            </div>
+            
+            <div id="routeInfo"></div>
+            
+            <div id="map" style="height: 500px;"></div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Flood-Aware Route Calculator</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/flood_data.js"></script>
+    <script src="js/route_calculator.js"></script>
+</body>
+</html>

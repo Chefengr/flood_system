@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood and Route System</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Leaflet CSS for maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Add Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Flood and Route System</h1>
+            <p class="subtitle">Real-time flood monitoring and safe route planning</p>
+        </header>
+        
+        <div class="data-section">
+            <h2>Current Flood Data</h2>
+            <div id="floodData" class="loading">Loading flood data...</div>
+        </div>
+        
+        <div class="data-section">
+            <h2>Map View</h2>
+            <div id="map"></div>
+        </div>
+        
+        <!-- Add this section after your flood data section -->
+        <div class="route-calculator">
+            <h2>Route Calculator</h2>
+            <div class="form-group">
+                <select id="startLocation" required>
+                    <option value="">Select Start Location</option>
+                    <!-- Options will be populated by JS -->
+                </select>
+                
+                <select id="vehicleType" required>
+                    <option value="">Select Vehicle Type</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="suv">SUV</option>
+                    <option value="pickup">Pickup</option>
+                    <option value="4x4">4x4</option>
+                </select>
+                
+                <select id="routeType" required>
+                    <option value="safest">Safest Route (No Flood)</option>
+                    <option value="shortest">Shortest Route (Minor Flood)</option>
+                    <option value="longest">Alternative Route (No Flood)</option>
+                </select>
+                
+                <button id="calculateRoute" type="button">Calculate Route</button>
+            </div>
+            
+            <div id="routeInfo"></div>
+        </div>
+    </div>
+
+    <!-- At the bottom of your HTML file, before the closing </body> tag -->
+    <script src="js/flood_data.js"></script>
+    <script src="js/map_init.js"></script>
+    <script src="js/route_calculator.js"></script>
+    <script>
+        // Wait for initialization
+        setTimeout(function() {
+            if (typeof initRouteCalculator === 'function') {
+                initRouteCalculator();
+            } else {
+                console.error('Route calculator not loaded');
+            }
+        }, 500);
+    </script>
+</body>
+</html>
