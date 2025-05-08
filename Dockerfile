@@ -14,12 +14,12 @@ COPY . /var/www/html/
 # Set proper ownership/permissions on the copied files
 RUN chown -R www-data:www-data /var/www/html
 
-# Add custom entrypoint script
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
 # Expose port 80 for HTTP
 EXPOSE 80
 
-# Set entrypoint to custom script
+# Copy the custom entrypoint script into the container
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set the entrypoint to our custom script
 ENTRYPOINT ["/entrypoint.sh"]
