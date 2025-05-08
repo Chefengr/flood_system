@@ -14,8 +14,12 @@ COPY . /var/www/html/
 # Set proper ownership/permissions on the copied files
 RUN chown -R www-data:www-data /var/www/html
 
+# Add custom entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Expose port 80 for HTTP
 EXPOSE 80
 
-# Ensure Apache is installed and running in the foreground
-CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
+# Set entrypoint to custom script
+ENTRYPOINT ["/entrypoint.sh"]
