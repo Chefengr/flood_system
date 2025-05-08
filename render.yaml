@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: flood_system
+    env: static
+    buildCommand: ""
+    staticPublishPath: .
